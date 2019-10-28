@@ -5,6 +5,7 @@ namespace App\Block;
 use App\Model\Hour;
 use App\Model\Room;
 use App\Model\Age;
+use DateTime;
 
 class FilmDisplay
 {
@@ -18,6 +19,7 @@ class FilmDisplay
         $html .= '<th role="columnheader">Title</th>';
         $html .= '<th role="columnheader">Room</th>';
         $html .= '<th role="columnheader">Hour</th>';
+        $html .= '<th role="columnheader">Time until starts</th>';
         $html .= '<th role="columnheader">Age-range</th>';
         $html .= '</tr>';
         $html .= '</thead>';
@@ -53,10 +55,24 @@ class FilmDisplay
         }
 
         $html = '';
-        $html .= '<tr role="row" class="tableColor">';
+        if ($film->active != 1){
+            $html .= '<tr role="row" class="tableColor bg-secondary">';
+        }else{
+            $html .= '<tr role="row" class="tableColor">';
+        }
         $html .= '<td role="cell">' . ucfirst($film->title) . '</td>';
         $html .= '<td role="cell">' . ucfirst($rooms[$film->room]) . '</td>';
-        $html .= '<td role="cell">' . ucfirst($hours[$film->hour]) . '</td>';
+
+        $date_expire = $hours[$film->hour];
+        $date = new DateTime($date_expire); // 15:00
+        $now = new DateTime(); //21:00
+//        dd($now);
+//        dd($date);
+
+        $time_left = $now->diff($date)->format("%h hours and %i minuts");
+
+        $html .= '<td role="cell">' . $hours[$film->hour] . '</td>';
+        $html .= '<td role="cell">' . $time_left . '</td>';
         $html .= '<td role="cell">' . ucfirst($ages[$film->age]) . '</td>';
         return $html;
     }

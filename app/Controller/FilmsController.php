@@ -10,12 +10,11 @@ use App\Model\Age;
 use App\Model\Hour;
 use App\Block\FilmDisplay;
 
-
 class FilmsController extends Controller
 {
     public function index()
     {
-        $currentDateTime = date('Y-m-d H:i:s');
+        $currentDateTime = date('H:i:s');
         $films = Film::getFilms();
         $block = new FilmDisplay();
         $this->view->time = $currentDateTime;
@@ -32,13 +31,13 @@ class FilmsController extends Controller
         }
         $agesObj = Age::getAges();
         $ages = [0 => 'Age-range'];
-        foreach ($agesObj as $age){
+        foreach ($agesObj as $age) {
             $ages[$age->id] = $age->range;
         }
 
         $hoursObj = Hour::getHours();
         $hours = [0 => 'Hours'];
-        foreach ($hoursObj as $hour){
+        foreach ($hoursObj as $hour) {
             $hours[$hour->id] = $hour->range;
         }
 
@@ -59,7 +58,7 @@ class FilmsController extends Controller
                 'name' => 'submit',
                 'type' => 'submit',
                 'value' => 'Create'
-            ],'btn btn-success mt-2');
+            ], 'btn btn-success mt-2');
 //        print_r($rooms);
 //        print_r($ages);
         $this->view->form = $form->get();
