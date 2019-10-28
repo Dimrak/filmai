@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?= urlStyle('css/normalize.css')?>">
     <link rel="stylesheet" href="<?= urlStyle('css/main.css')?>">
     <!--For the automatic refresh-->
-<!--    <meta http-equiv="refresh" content="5">-->
+    <meta http-equiv="refresh" content="5">
     <title>Filmai</title>
 </head>
 <?php //include 'navbar.php';?>
